@@ -37,4 +37,11 @@ public class TextoFragment extends Fragment {
 
         return textoLayoutInflated;
     }
+
+    public void alterarTamanhoTexto(int fontetamanho, String texto){
+
+        tvExibirTexto.setTextSize(fontetamanho);
+        tvExibirTexto.setText(texto);
+
+    }
 }

@@ -1,8 +1,10 @@
 package machado.santos.dos.icaro.conceitofragments;
 
 import android.content.Context;
+
 import android.os.Bundle;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
@@ -18,7 +20,7 @@ import android.widget.Toast;
 
 
 public class ToolbarFragment extends Fragment implements SeekBar.OnSeekBarChangeListener {
-    private static int textsize = 10;
+    private static int textsize = 10; //default tamanho da fonte texto;
     private Button btnAlterarTexto;
     private EditText edtInformarTexto;
     private SeekBar skbFormatarTexto;
@@ -26,7 +28,8 @@ public class ToolbarFragment extends Fragment implements SeekBar.OnSeekBarChange
 
     public interface ToolbarListener {
 
-        public void onButtonClick(int position, String texto);
+        void onButtonClick(int position, String texto);
+        void onSeekbarProgressChanged(int position, String texto);
 
     }
 
@@ -36,8 +39,7 @@ public class ToolbarFragment extends Fragment implements SeekBar.OnSeekBarChange
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
 
-
-        try{
+        try {
 
             toolbarListener = (ToolbarListener) context;
 
@@ -82,6 +84,7 @@ public class ToolbarFragment extends Fragment implements SeekBar.OnSeekBarChange
             }
         });
 
+        skbFormatarTexto.setOnSeekBarChangeListener((SeekBar.OnSeekBarChangeListener) this);
 
         return toolBarLayoutInflated;
     }
@@ -95,6 +98,7 @@ public class ToolbarFragment extends Fragment implements SeekBar.OnSeekBarChange
     @Override
     public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
         textsize = i;
+        toolbarListener.onSeekbarProgressChanged(textsize, edtInformarTexto.getText().toString());
     }
 
     @Override
