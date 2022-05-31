@@ -25,7 +25,7 @@ public class RespostaActivity extends AppCompatActivity {
     private EditText edtResposta;
     private TextView tvExibirPergunta;
     private ImageButton imgBtnLimparR;
-    private String resposta;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,11 +53,12 @@ public class RespostaActivity extends AppCompatActivity {
 
         String pergunta;
         String perguntaefetuada;
+        String resposta = null;
 
         if(extra != null){
 
             pergunta = extra.getString("PERGUNTA");
-
+            resposta = extra.getString("RESPOSTA");
 
         }  else {
 
@@ -68,7 +69,7 @@ public class RespostaActivity extends AppCompatActivity {
         perguntaefetuada  = "A Pergunta efetuada foi: " + DOUBLE_QUEBRA_DE_LINHA + pergunta;
 
         tvExibirPergunta.setText(perguntaefetuada);
-
+        edtResposta.setText(resposta);
 
         btnResposta.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,7 +102,7 @@ public class RespostaActivity extends AppCompatActivity {
     public void finish(){
         Intent data = new Intent();
 
-        resposta = edtResposta.getText().toString();
+        String resposta = edtResposta.getText().toString();
         data.putExtra("RETURN_DATA", resposta);
 
 
