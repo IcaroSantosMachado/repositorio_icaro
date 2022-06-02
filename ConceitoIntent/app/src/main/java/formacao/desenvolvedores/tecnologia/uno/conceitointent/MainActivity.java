@@ -8,10 +8,11 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
+import android.nfc.Tag;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,8 +20,11 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import formacao.desenvolvedores.tecnologia.uno.conceitointent.utils.app.UtilsApp;
+
 public class MainActivity extends AppCompatActivity {
 
+    private static final String TAG = "UTILSAPP";
     private static final int REQUEST_CODE = 5;
     private static final String DOUBLE_QUEBRA_DE_LINHA = "\n\n"; // Acrescentado por mim(Ícaro).
     private Button btnPergunta;
@@ -50,6 +54,11 @@ public class MainActivity extends AppCompatActivity {
         tvAnterior       = findViewById(R.id.tvAnterior);// Esse TextView não está no projeto original(do professor).
         imgBtnLimpar     = findViewById(R.id.imgBtnLimpar);
 
+        tvExibirResposta.setVisibility(View.INVISIBLE);
+        tvAnterior.setVisibility(View.INVISIBLE);
+
+
+
         activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
                 new ActivityResultCallback<ActivityResult>() {
                     @Override
@@ -69,8 +78,6 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
-        tvExibirResposta.setVisibility(View.INVISIBLE);
-        tvAnterior.setVisibility(View.INVISIBLE);
 
 
         btnPergunta.setOnClickListener(new View.OnClickListener() {
@@ -110,7 +117,6 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
         imgBtnLimpar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -120,7 +126,6 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
 
 
 
@@ -165,9 +170,6 @@ public class MainActivity extends AppCompatActivity {
 
 
 } //fim MainActivity;
-
-
-
 
 
 
