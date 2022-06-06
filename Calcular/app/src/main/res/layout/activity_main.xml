@@ -69,14 +69,11 @@
         android:id="@+id/btnCalcular"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="136dp"
-        android:layout_marginEnd="110dp"
+        android:layout_marginTop="32dp"
         android:text="Calcular"
-        app:layout_constraintEnd_toStartOf="@+id/imgResultado"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvOperacao" />
+        app:layout_constraintEnd_toEndOf="@+id/edtOperando2"
+        app:layout_constraintStart_toStartOf="@+id/edtOperando2"
+        app:layout_constraintTop_toBottomOf="@+id/imgResultado" />
 
     <EditText
         android:id="@+id/edtOperando2"
@@ -106,9 +103,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
+        android:textAlignment="center"
         android:hint="Resultado da operação matemática"
-        app:layout_constraintEnd_toEndOf="@+id/edtOperando2"
-        app:layout_constraintStart_toStartOf="@+id/edtOperando2"
-        app:layout_constraintTop_toBottomOf="@+id/imgResultado" />
+        app:layout_constraintEnd_toEndOf="@+id/btnCalcular"
+        app:layout_constraintStart_toStartOf="@+id/btnCalcular"
+        app:layout_constraintTop_toBottomOf="@+id/btnCalcular" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
