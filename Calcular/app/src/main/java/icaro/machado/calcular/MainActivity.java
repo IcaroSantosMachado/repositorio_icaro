@@ -4,6 +4,7 @@ package icaro.machado.calcular;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -14,6 +15,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DecimalFormat;
+
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     public static final String DIVISAO       = "Divisão";
@@ -23,9 +26,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private Button    btnCalcular;
     private EditText  edtOperando1, edtOperando2;
     private ImageView imgOperacao, imgResultado;
-    private TextView  tvOpcao, tvOperacao, tvResultado;
+    private TextView  tvOpcao, tvResultado;
     private Spinner   spiOpcoes;
     private String    operadorselecionado;
+    private double    quociente, produto, soma, diferença;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,9 +42,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         imgOperacao  = findViewById(R.id.imgOperacao);
         imgResultado = findViewById(R.id.imgResultado);
         tvOpcao      = findViewById(R.id.tvOpcao);
-        tvOperacao   = findViewById(R.id.tvOperacao);
         tvResultado  = findViewById(R.id.tvResultado);
         spiOpcoes    = findViewById(R.id.spiOpcoes);
+
 
         ArrayAdapter<String> adapteroperacoes = new ArrayAdapter<String>(MainActivity.this
                 , android.R.layout.simple_spinner_item
@@ -49,6 +53,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         spiOpcoes.setAdapter(adapteroperacoes);
         spiOpcoes.setOnItemSelectedListener(this);
+        imgOperacao.setImageDrawable(null);
 
 
         btnCalcular.setOnClickListener(new View.OnClickListener() {
@@ -56,26 +61,47 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             public void onClick(View view) {
                 if (!edtOperando1.getText().toString().isEmpty()){
                     if (!edtOperando2.getText().toString().isEmpty()){
+//                        double valor = Integer.valueOf(edtOperando1.getText().toString());
+//                        double valor2 = Integer.valueOf(edtOperando2.getText().toString());
 
-                        double valor  = Integer.valueOf(edtOperando1.getText().toString());
-                        double valor2 = Integer.valueOf(edtOperando2.getText().toString());
+                        double valor = Integer.valueOf(edtOperando1.getInputType());
+                        double valor2 = Integer.valueOf(edtOperando2.getInputType());
+//
+//
+//                        if(InputType.TYPE_NUMBER_FLAG_DECIMAL != 0){
+//                            valor = Integer.valueOf(edtOperando1.getInputType());
+//                            valor2 = Integer.valueOf(edtOperando2.getInputType());
+//                        } else {
+//                            valor  = Integer.valueOf(edtOperando1.getText().toString());
+//                            valor2  = Integer.valueOf(edtOperando2.getText().toString());
+//
+//                        }
 
-                        if ((operadorselecionado.equals(DIVISAO)) && (valor > 0) && (valor2 > 0) ){
 
-                            tvResultado.setText(divisao(valor, valor2));
+                        String textresultado = String.format("O Resultado da %s é:   ", operadorselecionado);
 
+                        if (operadorselecionado.equals(DIVISAO)){
+                            if(valor != 0) {
+
+                                tvResultado.setText(textresultado + divisaoString(dividir(valor, valor2)));
+
+                            } else {
+
+                                Toast.makeText(MainActivity.this, "O Divisor não pode ser '0'.", Toast.LENGTH_SHORT).show();
+
+                            }
 
                         } else if (operadorselecionado.equals(MULTIPLICACAO)){
 
-                            tvResultado.setText(multiplicar(valor, valor2));
+                            tvResultado.setText(textresultado + multiplicar(valor, valor2));
 
                         } else if (operadorselecionado.equals(SOMA)){
 
-                            tvResultado.setText(somar(valor, valor2));
+                            tvResultado.setText(textresultado + somar(valor, valor2));
 
                         } else if (operadorselecionado.equals(SUBTRACAO)){
 
-                            tvResultado.setText(subtrair(valor, valor2));
+                            tvResultado.setText(textresultado + subtrair(valor, valor2));
 
                         } else {
 
@@ -98,6 +124,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             }
         });
 
+
     }
 
 
@@ -105,46 +132,30 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
         operadorselecionado = adapterView.getSelectedItem().toString();
-        tvOperacao.setText(operadorselecionado);
 
-        switch (i){
-            case 0: {
+        if(operadorselecionado.equals(DIVISAO)){
 
-                imgOperacao.setImageDrawable(null);
-                break;
+            imgOperacao.setImageDrawable(getDrawable(R.drawable.divisao));
+            edtOperando1.setHint("Divisor");
+            edtOperando2.setHint("Dividendo");
 
-            }
+        } else if (operadorselecionado.equals(MULTIPLICACAO)){
 
-            case 1: {
+            imgOperacao.setImageDrawable(getDrawable(R.drawable.multiplica));
+            edtOperando1.setHint("Multiplicando");
+            edtOperando2.setHint("Multiplicador");
 
-                imgOperacao.setImageDrawable(getDrawable(R.drawable.divisao));
-                break;
-            }
+        } else if (operadorselecionado.equals(SOMA)){
 
-            case 2: {
+            imgOperacao.setImageDrawable(getDrawable(R.drawable.soma));
+            edtOperando1.setHint("Parcela");
+            edtOperando2.setHint("Parcela");
 
-                imgOperacao.setImageDrawable(getDrawable(R.drawable.multiplica));
-                break;
-            }
+        } else if (operadorselecionado.equals(SUBTRACAO)){
 
-            case 3: {
-
-                imgOperacao.setImageDrawable(getDrawable(R.drawable.soma));
-                break;
-            }
-
-            case 4: {
-
-                imgOperacao.setImageDrawable(getDrawable(R.drawable.subtracao));
-                break;
-            }
-
-            default: {
-
-                i = 0;
-                break;
-
-            }
+            imgOperacao.setImageDrawable(getDrawable(R.drawable.subtracao));
+            edtOperando1.setHint("Minuendo");
+            edtOperando2.setHint("Subtraendo");
 
         }
     }
@@ -154,69 +165,99 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     }
 
-    public String divisao(double a, double b){
+    private double dividir(double divisor, double dividendo){
+
+        double quociente = divisor / dividendo;// foi Usado o tipo 'double' para termos um resultado mais preciso.
+
+        return quociente;
+    }
+
+    private String divisaoString(double quociente){
         String resultado;
 
-        double c = a / b;
+        this.quociente = quociente;
 
-        if(c == Math.rint(c)){
+        if (quociente == Math.rint(quociente)) {
 
-            resultado = "" + (int) (c);
+            resultado = "" + (int) (quociente);// Casting para retirar o ponto zero do 'double'.
 
         } else {
 
-            resultado = "" + c;
+            resultado = "" + quociente;
         }
 
         return resultado;
     }
 
-    public String multiplicar(double a, double b){
+    private double multiplicar(double multiplicando, double multiplicador){
+
+        double produto = multiplicando * multiplicador;// foi Usado o tipo 'double' para termos um resultado mais preciso.
+
+        return produto;
+    }
+
+    private String multiplicarString(double produto){
         String resultado;
 
-        double c = a * b;
+        this.produto = produto;
 
-        if(c == Math.rint(c)) {
+        if(produto == Math.rint(produto)){
 
-            resultado = "" + (int)(c);
+            resultado =  "" + (int)(produto);
 
         } else {
 
-            resultado = "" + c;
+            resultado = "" + produto;
 
         }
 
         return resultado;
     }
 
-    public String somar(double a, double b){
+    private double somar(double parcela, double parcela2){
+
+        double soma = parcela + parcela2;// foi Usado o tipo 'double' para termos um resultado mais preciso.
+
+        return soma;
+    }
+
+    private String somarString(double soma){
         String resultado;
-        double c = a + b;
 
-        if(c == Math.rint(c)) {
+        this.soma = soma;
 
-            resultado = "" + (int)(c);
+        if(soma == Math.rint(soma)){
+
+            resultado = "" + (int)(soma);
 
         } else {
 
-            resultado = "" + c;
-
+            resultado = "" + soma;
         }
 
         return resultado;
     }
 
-    public String subtrair(double a, double b){
+    private double subtrair(double minuendo, double subtraendo){
+
+        double diferença =  minuendo - subtraendo;// foi Usado o tipo 'double' para termos um resultado mais preciso..
+
+        return diferença;
+
+    }
+
+    private String subtrairString(double diferença){
         String resultado;
-        double c =  a - b;
 
-        if(c == Math.rint(c)) {
+        this.diferença = diferença;
 
-            resultado = "" + (int)(c);
+        if(diferença == Math.rint(diferença)){
+
+            resultado = "" + (int)(diferença);
 
         } else {
 
-            resultado = "" + c;
+            resultado = "" + diferença;
 
         }
 

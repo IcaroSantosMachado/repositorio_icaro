@@ -91,45 +91,52 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         tvOperacao.setText(operadorselecionado);
 
         switch (i){
-            case 0: {
+                    case 0: {
 
-                imgOperacao.setImageDrawable(null);
-                break;
+                        imgOperacao.setImageDrawable(null);
+                        break;
 
-            }
+                    }
 
-            case 1: {
+                    case 1: {
 
-                imgOperacao.setImageDrawable(getDrawable(R.drawable.divisao));
-                break;
-            }
+                        imgOperacao.setImageDrawable(getDrawable(R.drawable.divisao));
+                        edtOperando1.setHint("Divisor");
+                        edtOperando2.setHint("Dividendo");
+                        break;
+                    }
 
-            case 2: {
+                    case 2: {
 
-                imgOperacao.setImageDrawable(getDrawable(R.drawable.multiplica));
-                break;
-            }
+                        imgOperacao.setImageDrawable(getDrawable(R.drawable.multiplica));
+                        edtOperando1.setHint("Multiplicando");
+                        edtOperando2.setHint("Multiplicador");
+                        break;
+                    }
 
-            case 3: {
+                    case 3: {
 
-                imgOperacao.setImageDrawable(getDrawable(R.drawable.soma));
-                break;
-            }
+                        imgOperacao.setImageDrawable(getDrawable(R.drawable.soma));
+                        edtOperando1.setHint("Parcela");
+                        edtOperando2.setHint("Parcela");
+                        break;
+                    }
 
-            case 4: {
+                    case 4: {
 
-                imgOperacao.setImageDrawable(getDrawable(R.drawable.subtracao));
-                break;
-            }
+                        imgOperacao.setImageDrawable(getDrawable(R.drawable.subtracao));
+                        edtOperando1.setHint("Minuendo");
+                        edtOperando2.setHint("Subtraendo");
+                        break;
+                    }
 
-            default: {
+                    default: {
 
-                i = 0;
-                break;
+                        i = 0;
+                        break;
 
-            }
+                    }
 
-        }
     }
 
     @Override
