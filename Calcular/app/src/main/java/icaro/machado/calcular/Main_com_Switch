@@ -212,4 +212,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         return resultado;
     }
+
+    //<a target="_blank" href="https://icons8.com/icon/95780/raiz-quadrada-2">Raiz quadrada 2</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
+    <a target="_blank" href="https://icons8.com/icon/95782/mais-2-matemática">Mais 2 matemática</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
 }

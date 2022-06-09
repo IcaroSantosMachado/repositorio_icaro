@@ -34,7 +34,7 @@
 
     <EditText
         android:id="@+id/edtOperando1"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:layout_marginStart="100dp"
@@ -102,12 +102,13 @@
         app:layout_constraintTop_toBottomOf="@+id/btnCalcular" />
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/imgBtnLimpar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         app:layout_constraintBottom_toBottomOf="@+id/btnCalcular"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btnCalcular"
+        app:layout_constraintTop_toTopOf="@+id/btnCalcular"
         app:srcCompat="@drawable/ic_baseline_cancel_presentation_24" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

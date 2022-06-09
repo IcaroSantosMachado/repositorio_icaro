@@ -3,7 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Alunos/Documents/GitHub/repositorio_icaro/Calcular/app/src/main/res/drawable-v24/exponent_box.xml" value="0.153" />
+        <entry key="..\:/Users/Alunos/Documents/GitHub/repositorio_icaro/Calcular/app/src/main/res/drawable-v24/math_log.xml" value="0.153" />
         <entry key="..\:/Users/Alunos/Documents/GitHub/repositorio_icaro/Calcular/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.153" />
+        <entry key="..\:/Users/Alunos/Documents/GitHub/repositorio_icaro/Calcular/app/src/main/res/drawable/ic_baseline_cancel_presentation_24.xml" value="0.153" />
+        <entry key="..\:/Users/Alunos/Documents/GitHub/repositorio_icaro/Calcular/app/src/main/res/drawable/ic_baseline_clear_24.xml" value="0.153" />
+        <entry key="..\:/Users/Alunos/Documents/GitHub/repositorio_icaro/Calcular/app/src/main/res/drawable/ic_baseline_drag_handle_24.xml" value="0.153" />
+        <entry key="..\:/Users/Alunos/Documents/GitHub/repositorio_icaro/Calcular/app/src/main/res/drawable/ic_launcher_background.xml" value="0.153" />
+        <entry key="..\:/Users/Alunos/Documents/GitHub/repositorio_icaro/Calcular/app/src/main/res/drawable/ic_outline_remove_24.xml" value="0.153" />
         <entry key="..\:/Users/Alunos/Documents/GitHub/repositorio_icaro/Calcular/app/src/main/res/layout/activity_main.xml" value="0.33" />
       </map>
     </option>
