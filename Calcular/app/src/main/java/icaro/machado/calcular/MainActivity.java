@@ -1,14 +1,17 @@
 package icaro.machado.calcular;
 
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.ColorUtils;
 
 import android.graphics.Color;
 import android.graphics.ColorMatrix;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -17,6 +20,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     public static final String POTENCIACAO     = "Potenciação";
     public static final String POTENCIA_DE_DEZ = "Potencia de dez";
     public static final String RAIZ_QUADRADA   = "Raiz Quadrada";
+    public static final double DEZ = 10;
     private Button    btnCalcular;
     private EditText  edtOperando1, edtOperando2;
     private ImageView imgOperacao, imgResultado;
@@ -39,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private TextView  tvOpcao, tvResultado;
     private Spinner   spiOpcoes;
     private String    operadorselecionado;
-    private double    quociente, produto, soma, diferença;
+    private double    quociente, produto, soma, diferença, potencia, raiz;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,27 +76,28 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             @Override
             public void onClick(View view) {
 
-                double valor = Double.parseDouble(edtOperando1.getText().toString());
-                double valor2 = Double.parseDouble(edtOperando2.getText().toString());
-
-                String textresultado = String.format("O Resultado da %s é:   ", operadorselecionado);
-
                 if (operadorVazio() != true) {
 
-                    if (operadorselecionado.equals(LOGARITMO)) {
+                    String textresultado = String.format("O Resultado da %s é:   ", operadorselecionado);
 
-                        tvResultado.setText(textresultado + logaritmo(valor));
+                    if (operadorselecionado.equals(LOGARITMO)){
 
-                    } else if (operadorselecionado.equals(POTENCIACAO)){
+                        tvResultado.setText(textresultado + logaritmo());
 
-                        tvResultado.setText(textresultado + "");
+                    } else if (operadorselecionado.equals(RAIZ_QUADRADA)) {
+
+                        tvResultado.setText(textresultado + radicalString(radical()));
+
+                    } else if (operadorselecionado.equals(POTENCIA_DE_DEZ)){
+
+                        tvResultado.setText(textresultado + potenciaNaDezString(potenciarNaDez()));
 
                     } else if (operandoVazio() != true) {
 
                         if (operadorselecionado.equals(DIVISAO)) {
-                            if (valor != 0) {
+                            if (diferenteDeZero() == true) {
 
-                                tvResultado.setText(textresultado + divisaoString(dividir(valor, valor2)));
+                                tvResultado.setText(textresultado + divisaoString(dividir()));
 
                             } else {
 
@@ -101,15 +107,19 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
                         } else if (operadorselecionado.equals(MULTIPLICACAO)) {
 
-                            tvResultado.setText(textresultado + multiplicarString(multiplicar(valor, valor2)));
+                            tvResultado.setText(textresultado + multiplicarString(multiplicar()));
 
                         } else if (operadorselecionado.equals(SOMA)) {
 
-                            tvResultado.setText(textresultado + somarString(somar(valor, valor2)));
+                            tvResultado.setText(textresultado + somarString(somar()));
 
                         } else if (operadorselecionado.equals(SUBTRACAO)) {
 
-                            tvResultado.setText(textresultado + subtrairString(subtrair(valor, valor2)));
+                            tvResultado.setText(textresultado + subtrairString(subtrair()));
+
+                        } else if (operadorselecionado.equals(POTENCIACAO)){
+
+                            tvResultado.setText(textresultado + potenciaString(potenciar()));
 
                         } else {
 
@@ -120,17 +130,17 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
                     } else {
 
-                        Toast.makeText(MainActivity.this, "Insira um número.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "Insira um operando.", Toast.LENGTH_SHORT).show();
 
                     }
 
-                    } else {
+                } else {
 
-                        Toast.makeText(MainActivity.this, "Insira um número.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Insira um operador.", Toast.LENGTH_SHORT).show();
 
-                    }
                 }
-            });
+            }
+        });
 
 
         imgBtnLimpar.setOnClickListener(new View.OnClickListener() {
@@ -145,62 +155,109 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
         operadorselecionado = adapterView.getSelectedItem().toString();
+        edtOperando2.setEnabled(true);
 
-        if(operadorselecionado.equals(DIVISAO)){
+        switch(operadorselecionado) {
 
-            imgOperacao.setImageDrawable(getDrawable(R.drawable.divisao));
-            imgOperacao.setColorFilter(getColor(R.color.purple_200));
-            edtOperando1.setHint("Divisor");
-            edtOperando2.setHint("Dividendo");
 
-        } else if (operadorselecionado.equals(MULTIPLICACAO)){
+            case (DIVISAO) : {
 
-            imgOperacao.setImageDrawable(getDrawable(R.drawable.multiplica));
-            imgOperacao.setColorFilter(getColor(R.color.purple_200));
-            edtOperando1.setHint("Multiplicando");
-            edtOperando2.setHint("Multiplicador");
+                imgOperacao.setImageDrawable(getDrawable(R.drawable.divisao));
+                imgOperacao.setColorFilter(getColor(R.color.purple_200));
+                edtOperando1.setHint("Divisor");
+                edtOperando2.setHint("Dividendo");
 
-        } else if (operadorselecionado.equals(SOMA)){
+                break;
+            }
 
-            imgOperacao.setImageDrawable(getDrawable(R.drawable.soma));
-            imgOperacao.setColorFilter(getColor(R.color.purple_200));
-            edtOperando1.setHint("Parcela");
-            edtOperando2.setHint("Parcela");
+            case (MULTIPLICACAO) : {
 
-        } else if (operadorselecionado.equals(SUBTRACAO)){
+                imgOperacao.setImageDrawable(getDrawable(R.drawable.multiplica));
+                imgOperacao.setColorFilter(getColor(R.color.purple_200));
+                edtOperando1.setHint("Multiplicando");
+                edtOperando2.setHint("Multiplicador");
 
-            imgOperacao.setImageDrawable(getDrawable(R.drawable.subtracao));
-            imgOperacao.setColorFilter(getColor(R.color.purple_200));
-            edtOperando1.setHint("Minuendo");
-            edtOperando2.setHint("Subtraendo");
+                break;
+            }
 
-        } else if (operadorselecionado.equals(LOGARITMO)){
+            case (SOMA) : {
 
-            imgOperacao.setImageDrawable(getDrawable(R.drawable.math_log));
-            imgOperacao.setColorFilter(getColor(R.color.purple_200));
-            edtOperando1.setHint("");
-            edtOperando2.setHint("");
+                imgOperacao.setImageDrawable(getDrawable(R.drawable.soma));
+                imgOperacao.setColorFilter(getColor(R.color.purple_200));
+                edtOperando1.setHint("Parcela");
+                edtOperando2.setHint("Parcela");
 
-        } else if (operadorselecionado.equals(POTENCIACAO)){
+                break;
+            }
 
-            imgOperacao.setImageDrawable(getDrawable(R.drawable.exponent_box));
-            imgOperacao.setColorFilter(getColor(R.color.purple_200));
+            case (SUBTRACAO) : {
 
-        } else if (operadorselecionado.equals(POTENCIA_DE_DEZ)){
+                imgOperacao.setImageDrawable(getDrawable(R.drawable.subtracao));
+                imgOperacao.setColorFilter(getColor(R.color.purple_200));
+                edtOperando1.setHint("Minuendo");
+                edtOperando2.setHint("Subtraendo");
 
-            imgOperacao.setImageDrawable(null);
-            imgOperacao.setColorFilter(getColor(R.color.purple_200));
+                break;
+            }
 
-        } else if (operadorselecionado.equals(RAIZ_QUADRADA)){
+            case (LOGARITMO) : {
 
-            imgOperacao.setImageDrawable(getDrawable(R.drawable.raiz_quadrada));
-            imgOperacao.setColorFilter(getColor(R.color.purple_200));
-            edtOperando1.setHint("");
-            edtOperando2.setHint("");
+                imgOperacao.setImageDrawable(getDrawable(R.drawable.math_log));
+                imgOperacao.setColorFilter(getColor(R.color.purple_200));
+                edtOperando1.setHint("");
+                edtOperando2.setHint("");
+
+                break;
+            }
+
+            case (POTENCIACAO) : {
+
+                imgOperacao.setImageDrawable(getDrawable(R.drawable.exponent_box));
+                imgOperacao.setColorFilter(getColor(R.color.purple_200));
+                edtOperando1.setHint("Base");
+                edtOperando2.setHint("Expoente");
+
+                break;
+            }
+
+            case (POTENCIA_DE_DEZ) : {
+
+                imgOperacao.setImageDrawable(null);
+                imgOperacao.setColorFilter(getColor(R.color.purple_200));
+                edtOperando1.setHint("Base");
+                edtOperando2.setHint("10");
+                edtOperando2.setHintTextColor(getColor(R.color.black));
+                edtOperando2.setBackgroundColor(getColor(R.color.purple_200));
+                editavel();
+
+                break;
+            }
+
+            case (RAIZ_QUADRADA) : {
+
+                imgOperacao.setImageDrawable(getDrawable(R.drawable.raiz_quadrada));
+                imgOperacao.setColorFilter(getColor(R.color.purple_200));
+                edtOperando1.setHint("Radicando");
+                edtOperando2.setHint("");
+                editavel();
+
+                break;
+            }
+
+
+            default: {
+
+                edtOperando1.setHint("valor");
+                edtOperando2.setHint("valor");
+                edtOperando2.setEnabled(true);
+
+            }
+
         }
     }
 
@@ -212,12 +269,15 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private boolean operadorVazio(){
 
         if (!edtOperando1.getText().toString().isEmpty()){
+
             return false;
+
 
         } else {
 
             return true;
         }
+
 
     }
 
@@ -235,7 +295,26 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     }
 
-    private double dividir(double divisor, double dividendo){
+    private boolean diferenteDeZero(){
+
+        double divisor = Double.valueOf(edtOperando1.getText().toString());
+
+        if (divisor != 0){
+
+            return true;
+
+        } else {
+
+            return false;
+
+        }
+
+    }
+
+    private double dividir(){
+
+        double divisor = Double.valueOf(edtOperando1.getText().toString());
+        double dividendo= Double.valueOf(edtOperando2.getText().toString());
 
         double quociente = divisor / dividendo;// foi Usado o tipo 'double' para termos um resultado mais preciso.
 
@@ -259,7 +338,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         return resultado;
     }
 
-    private double multiplicar(double multiplicando, double multiplicador){
+    private double multiplicar(){
+
+        double multiplicando = Double.valueOf(edtOperando1.getText().toString());
+        double multiplicador = Double.valueOf(edtOperando2.getText().toString());
 
         double produto = multiplicando * multiplicador;// foi Usado o tipo 'double' para termos um resultado mais preciso.
 
@@ -284,7 +366,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         return resultado;
     }
 
-    private double somar(double parcela, double parcela2){
+    private double somar(){
+
+        double parcela = Double.valueOf(edtOperando1.getText().toString());
+        double parcela2 = Double.valueOf(edtOperando2.getText().toString());
 
         double soma = parcela + parcela2;// foi Usado o tipo 'double' para termos um resultado mais preciso.
 
@@ -308,7 +393,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         return resultado;
     }
 
-    private double subtrair(double minuendo, double subtraendo){
+    private double subtrair(){
+
+        double minuendo = Double.valueOf(edtOperando1.getText().toString());
+        double subtraendo = Double.valueOf(edtOperando2.getText().toString());
 
         double diferença =  minuendo - subtraendo;// foi Usado o tipo 'double' para termos um resultado mais preciso..
 
@@ -334,13 +422,95 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         return resultado;
     }
 
-    private String logaritmo(double valor){
+    private String logaritmo(){
+
+        double valor = Double.valueOf(edtOperando1.getText().toString());
 
         String resultado = String.valueOf(Math.log(valor));
 
         return resultado;
     }
 
+    private double potenciar(){
+        double base = Double.valueOf(edtOperando1.getText().toString());
+        double expoente = Double.valueOf(edtOperando2.getText().toString());
 
+        double potencia = Math.pow(base, expoente);
+
+        return potencia;
+    }
+
+    private String potenciaString(double potencia){
+        String resultado;
+
+        if(potencia == Math.rint(potencia)){
+
+            resultado = "" + (int)(potencia);
+
+        } else {
+
+            resultado = "" + potencia;
+
+        }
+
+
+        return resultado;
+    }
+
+    private double potenciarNaDez(){
+        double base = Double.valueOf(edtOperando1.getText().toString());
+
+        double potencia = Math.pow(base, DEZ);
+
+        return potencia;
+    }
+
+    private String potenciaNaDezString(double potencia){
+        String resultado;
+
+        if(potencia == Math.rint(potencia)){
+
+            resultado = "" + (int)(potencia);
+
+        } else {
+
+            resultado = "" + potencia;
+
+        }
+
+
+        return resultado;
+    }
+
+    private double radical(){
+
+        double radicando = Double.valueOf(edtOperando1.getText().toString());
+
+        raiz = Math.sqrt(radicando);
+
+        return raiz;
+    }
+
+    private String radicalString(double raiz){
+        String resultado;
+
+        if(raiz == Math.rint(raiz)){
+
+            resultado = "" + (int)(raiz);
+
+        } else {
+
+            resultado = "" + raiz;
+
+        }
+
+        return resultado;
+    }
+
+    private void editavel(){
+
+        edtOperando2.setEnabled(false);
+
+    }
 
 }
