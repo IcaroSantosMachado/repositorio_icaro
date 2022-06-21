@@ -60,41 +60,6 @@ public class MainActivity extends FragmentActivity implements AdapterView.OnItem
         if(fragmentManager != null)
             fragmentManager.popBackStack();
 
-//        if(adapterView.getItemAtPosition(i).toString().equals(CIRCUNFERENCIA)){
-//            if(fragmentManager != null){
-//                fragmentManager.beginTransaction()
-//                        .replace(R.id.mainFragment, CircunferenciaFrag.class, null)
-//                        .setReorderingAllowed(true)
-//                        .addToBackStack("Circunferência")
-//                        .commit();
-//            }
-//
-//        } else if(adapterView.getItemAtPosition(i).toString().equals(RETANGULO)){
-//            if(fragmentManager != null){
-//                fragmentManager.beginTransaction()
-//                        .replace(R.id.mainFragment, RetanguloFrag.class, null)
-//                        .setReorderingAllowed(true)
-//                        .addToBackStack("Retângulo")
-//                        .commit();
-//            }
-//
-//        } else if(adapterView.getItemAtPosition(i).toString().equals(TRIANGULO)){
-//            if(fragmentManager != null){
-//                fragmentManager.beginTransaction()
-//                        .replace(R.id.mainFragment, TrianguloFrag.class, null)
-//                        .setReorderingAllowed(true)
-//                        .addToBackStack("Triângulo")
-//                        .commit();
-//            }
-//
-//        } else {
-//            fragmentManager.beginTransaction()
-//                    .replace(R.id.mainFragment, MensagemFragment.class, null)
-//                    .setReorderingAllowed(true)
-//                    .addToBackStack("MensagemFrag")
-//                    .commit();
-//        }
-
         switch (opcoesSelecionada){
 
             case (CIRCUNFERENCIA) : {
