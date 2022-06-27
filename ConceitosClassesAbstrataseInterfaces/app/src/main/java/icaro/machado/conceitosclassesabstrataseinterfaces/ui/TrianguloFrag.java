@@ -49,12 +49,6 @@ public class TrianguloFrag extends Fragment {
         tvAreaTriangulo       = layoutFragment.findViewById(R.id.tvAreaTriangulo);
         imgbLimparTriangulo   = layoutFragment.findViewById(R.id.imgbLimparTriangulo);
         imgbCalcularTriangulo = layoutFragment.findViewById(R.id.imgbCalcularTriangulo);
-//        imgLado               = layoutFragment.findViewById(R.id.imgLado);
-//        imgLado2              = layoutFragment.findViewById(R.id.lado2);
-//        imgLado3              = layoutFragment.findViewById(R.id.lado3);
-//
-//        RelativeLayout.LayoutParams lado = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-
 
 
         imgbCalcularTriangulo.setOnClickListener(view -> {
