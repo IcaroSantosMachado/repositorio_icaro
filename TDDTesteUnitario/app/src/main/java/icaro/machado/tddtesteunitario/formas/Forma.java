@@ -7,11 +7,11 @@ public abstract class Forma {
 
     public abstract double area();
 
-    public double getMedida(int numMedidas){
+    public double getMedidas(int medida){
 
-        if(numMedidas >= 0 && numMedidas <= maximoTamanho){
+        if(medida >= 0 && medida <= maximoTamanho){
 
-            return numeroDeMedidas[numMedidas];
+            return numeroDeMedidas[medida];
 
         } else {
 
@@ -21,16 +21,17 @@ public abstract class Forma {
 
     }
 
-    public void setMedidas(int posicao, double numMedidas){
+    public void setMedidas(int medida, double valorMedidas){
 
-        numeroDeMedidas[posicao] = numMedidas;
+        numeroDeMedidas[medida] = valorMedidas;
+
+    }
+
+    public Forma(int medida){
+
+        numeroDeMedidas = new double[medida];
 
     }
 
-    public Forma(int numMedidas){
-
-        numeroDeMedidas = new double[numMedidas];
-
-    }
 
 }
