@@ -22,9 +22,13 @@ public class Triangulo extends Forma{
 
             return Math.sqrt(aux);
 
+        } else if (getMedidas(0) == getMedidas(1) && getMedidas(0) == getMedidas(2)){
+
+            return Math.sqrt(3) / 4 * Math.pow(getMedidas(0), 2);
+
         } else {
 
-            return (getMedidas(BASE) * getMedidas(ALTURA)) / DIVIDINDO_POR_DOIS; //Calculo Area do triangulo Equilatero;
+            return (getMedidas(BASE) * getMedidas(ALTURA)) / DIVIDINDO_POR_DOIS; //Calculo Area do Triangulo Retangulo;
 
         }
     }

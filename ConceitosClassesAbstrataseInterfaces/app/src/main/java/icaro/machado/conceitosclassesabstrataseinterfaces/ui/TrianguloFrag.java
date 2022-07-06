@@ -62,7 +62,7 @@ public class TrianguloFrag extends Fragment {
             else if(edtLado3.getText().toString().isEmpty()){
                 Toast.makeText(getContext(), "Informe o lado 03 do triângulo!", Toast.LENGTH_SHORT).show();
 
-            } else{
+            } else {
                 Triangulo triangulo = new Triangulo(Double.valueOf(edtLado1.getText().toString())
                         , Double.valueOf(edtLado2.getText().toString())
                         , Double.valueOf(edtLado3.getText().toString()));

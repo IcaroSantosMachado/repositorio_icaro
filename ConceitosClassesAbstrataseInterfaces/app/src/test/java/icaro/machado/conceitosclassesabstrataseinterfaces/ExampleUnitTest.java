@@ -1,8 +1,10 @@
 package icaro.machado.conceitosclassesabstrataseinterfaces;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
+
 
 import icaro.machado.conceitosclassesabstrataseinterfaces.formas.Circunferencia;
 import icaro.machado.conceitosclassesabstrataseinterfaces.formas.Retangulo;
@@ -14,6 +16,7 @@ import icaro.machado.conceitosclassesabstrataseinterfaces.formas.Triangulo;
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 public class ExampleUnitTest {
+
     @Test
     public void addition_isCorrect() {
         assertEquals(4, 2 + 2);
@@ -26,7 +29,9 @@ public class ExampleUnitTest {
 
         Retangulo retangulo = new Retangulo(3, 2);
 
-        retangulo.area();
+        double area = retangulo.area();
+
+        Assert.assertEquals(6, area, 2);
 
     }
 
@@ -35,7 +40,13 @@ public class ExampleUnitTest {
 
         Triangulo triangulo = new Triangulo(5, 8, 9);
 
-        triangulo.area();
+        double area = triangulo.area();
+        double areaEsperada = 19.8997;
+
+        boolean comparacao = (area == areaEsperada);
+
+        Assert.assertTrue(String.format("Area Esperada <%f>, Area Atual <%f>", area, areaEsperada)
+                        , comparacao);
 
     }
 }
