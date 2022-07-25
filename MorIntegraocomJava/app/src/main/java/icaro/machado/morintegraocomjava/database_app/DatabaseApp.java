@@ -5,10 +5,16 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.room.RoomDatabase;
+import androidx.room.TypeConverter;
+import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import java.util.concurrent.Executors;
 
+import icaro.machado.morintegraocomjava.database_app.converter.Converters;
+
+
+@TypeConverters(Converters.class)
 public abstract class DatabaseApp extends RoomDatabase {
 
     private static final String DB_NAME = "db_app.db";
@@ -31,12 +37,7 @@ public abstract class DatabaseApp extends RoomDatabase {
             });
         }
 
-        public void onOpen (SupportSQLiteDatabase db) {
-
-
-
-        }
+        public void onOpen (SupportSQLiteDatabase db) {}
     };
-
 
 }
