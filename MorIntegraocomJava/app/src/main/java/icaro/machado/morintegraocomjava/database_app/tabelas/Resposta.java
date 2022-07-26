@@ -15,7 +15,7 @@ public class Resposta {
 
     private int id;
 
-    private int perguntaId;
+    private int perguntaid;
 
     private String resposta;
 
@@ -25,7 +25,7 @@ public class Resposta {
 
         this.id         = tblResposta.getId();
         this.resposta   = tblResposta.getResposta();
-        this.perguntaId = tblResposta.getPerguntaID();
+        this.perguntaid = tblResposta.getperguntaid();
 
     }
 
@@ -37,12 +37,12 @@ public class Resposta {
         this.id = id;
     }
 
-    public int getPerguntaID() {
-        return perguntaId;
+    public int getperguntaid() {
+        return perguntaid;
     }
 
-    public void setPerguntaID(int perguntaId) {
-        this.perguntaId = perguntaId;
+    public void setperguntaid(int perguntaid) {
+        this.perguntaid = perguntaid;
     }
 
     public String getResposta() {

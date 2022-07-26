@@ -3,7 +3,7 @@ package icaro.machado.morintegraocomjava.database_app.tabelas;
 import androidx.room.Entity;
 import androidx.room.Index;
 
-@Entity(tableName = "tbl_prova"
+@Entity(    tableName = "tbl_prova"
         ,   primaryKeys = {"id"}
         ,   indices = {@Index(value = "id", unique = true)})
 

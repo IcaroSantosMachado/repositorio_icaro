@@ -4,8 +4,8 @@ import androidx.room.Entity;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "tbl_aluno"
-        , indices = {@Index(value = "id", unique = true)})
+@Entity(    tableName = "tbl_aluno"
+        ,   indices = {@Index(value = "id", unique = true)})
 
 public class Aluno {
 
@@ -15,7 +15,7 @@ public class Aluno {
     private String nome;
     private String celular;
     private String email;
-    private String githubUsuario;
+    private String gitHubUsuario;
 
     public Aluno() {}
 
@@ -25,7 +25,7 @@ public class Aluno {
         this.nome          = tblAluno.getNome();
         this.celular       = tblAluno.getCelular();
         this.email         = tblAluno.getEmail();
-        this.githubUsuario = tblAluno.getGithubUsuario();
+        this.gitHubUsuario = tblAluno.getGithubUsuario();
 
     }
 
@@ -62,11 +62,11 @@ public class Aluno {
     }
 
     public String getGithubUsuario() {
-        return githubUsuario;
+        return gitHubUsuario;
     }
 
-    public void setGithubUsuario(String githubUsuario) {
-        this.githubUsuario = githubUsuario;
+    public void setGitHubUsuario(String gitHubUsuario) {
+        this.gitHubUsuario = gitHubUsuario;
     }
 
 

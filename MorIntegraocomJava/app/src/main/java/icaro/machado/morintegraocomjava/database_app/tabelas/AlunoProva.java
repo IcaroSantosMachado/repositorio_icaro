@@ -6,13 +6,13 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.Index;
 
-@Entity(tableName = "tbl_alunoprova"
-       , primaryKeys = {"alunoid", "provaid"}
-       , indices = {@Index(value = {"alunoid"}), @Index(value = {"provaid"})}
-       , foreignKeys = {@ForeignKey(entity = Aluno.class, parentColumns = "id",
-            childColumns = "alunoid", onDelete = CASCADE, onUpdate = CASCADE)
+@Entity(    tableName = "tbl_alunoprova"
+       ,    primaryKeys = {"alunoid", "provaid"}
+       ,    indices = {@Index(value = {"alunoid"}), @Index(value = {"provaid"})}
+       ,    foreignKeys = {@ForeignKey(entity = Aluno.class, parentColumns = "id",
+                childColumns = "alunoid", onDelete = CASCADE, onUpdate = CASCADE)
                     ,  @ForeignKey(entity = Prova.class, parentColumns = "id",
-            childColumns = "prova id", onDelete = CASCADE, onUpdate = CASCADE)})
+                childColumns = "prova id", onDelete = CASCADE, onUpdate = CASCADE)})
 
 public class AlunoProva {
 
