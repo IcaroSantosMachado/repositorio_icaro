@@ -21,8 +21,8 @@ public interface ICRUDPerguntaDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertPergunta(Pergunta tblPergunta);
 
-    @Query("SELECT id, pergunta, provaId FROM tbl_pergunta WHERE id = 4")
-    Pergunta getEspecificPerguntaByID(Pergunta id);
+    @Query("SELECT id, pergunta, provaId FROM tbl_pergunta WHERE id = :id")
+    Pergunta getEspecificPerguntaByID(int id);
 
     @Query("SELECT id, pergunta, provaId FROM tbl_pergunta")
     List<Pergunta> getAllPerguntas();
@@ -33,8 +33,8 @@ public interface ICRUDPerguntaDAO {
     @Delete
     void deletePerguntas(Pergunta tblPergunta);
 
-    @Query("DELETE FROM tbl_pergunta WHERE id = 5")
-    void deletePerguntaByID(Pergunta id);
+    @Query("DELETE FROM tbl_pergunta WHERE id = :id")
+    void deletePerguntaByID(int id);
 
     @Query("DElETE FROM tbl_pergunta")
     void deleteAllPerguntas();

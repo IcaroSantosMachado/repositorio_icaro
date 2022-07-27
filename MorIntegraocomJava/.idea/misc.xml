@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Alunos/Documents/GitHub/repositorio_icaro/MorIntegraocomJava/app/src/main/res/drawable/ic_close_black_24dp.xml" value="0.1485" />
+        <entry key="..\:/Users/Alunos/Documents/GitHub/repositorio_icaro/MorIntegraocomJava/app/src/main/res/layout/activity_cadastro_aluno.xml" value="0.3067708333333333" />
         <entry key="..\:/Users/Alunos/Documents/GitHub/repositorio_icaro/MorIntegraocomJava/app/src/main/res/layout/activity_main.xml" value="0.3067708333333333" />
       </map>
     </option>

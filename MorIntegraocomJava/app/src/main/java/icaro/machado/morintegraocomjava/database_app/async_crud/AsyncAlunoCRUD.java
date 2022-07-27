@@ -30,6 +30,12 @@ public class AsyncAlunoCRUD extends AsyncTask<Aluno, Integer, List<Aluno>> {
         dbCallBack                     = new WeakReference(callBack);
     }
 
+    public AsyncAlunoCRUD(Context context){
+        this.dbOperations              = UtilsApp.DataBaseCrudOperations.CREATE;
+        this.contextActivityOrFragment = context;
+        dbCallBack                     = null;
+    }
+
     @Override
     protected List<Aluno> doInBackground(Aluno... alunos) {
         try{

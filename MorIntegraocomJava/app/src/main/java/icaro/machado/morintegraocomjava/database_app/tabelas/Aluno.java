@@ -25,7 +25,7 @@ public class Aluno {
         this.nome          = tblAluno.getNome();
         this.celular       = tblAluno.getCelular();
         this.email         = tblAluno.getEmail();
-        this.gitHubUsuario = tblAluno.getGithubUsuario();
+        this.gitHubUsuario = tblAluno.getGitHubUsuario();
 
     }
 
@@ -61,7 +61,7 @@ public class Aluno {
         this.email = email;
     }
 
-    public String getGithubUsuario() {
+    public String getGitHubUsuario() {
         return gitHubUsuario;
     }
 

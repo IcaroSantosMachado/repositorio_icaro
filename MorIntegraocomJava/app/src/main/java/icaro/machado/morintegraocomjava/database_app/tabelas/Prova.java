@@ -16,15 +16,15 @@ public class Prova {
     public Prova(){}
 
     public Prova(Prova tblProva) {
-        this.id = tblProva.getID();
+        this.id = tblProva.getId();
         this.disciplina = tblProva.disciplina;
     }
 
-    public int getID() {
+    public int getId() {
         return id;
     }
 
-    public void setID(int id) {
+    public void setId(int id) {
         this.id = id;
     }
 

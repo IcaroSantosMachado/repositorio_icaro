@@ -10,7 +10,7 @@ import androidx.room.Index;
         ,   primaryKeys = {"id"}
         ,   indices   = {@Index(value = "id", unique = true)}
         ,   foreignKeys = {@ForeignKey(entity = Pergunta.class, parentColumns = "id"
-        ,         childColumns = "perguntaId", onDelete = CASCADE, onUpdate = CASCADE)})
+        ,         childColumns = "perguntaid", onDelete = CASCADE, onUpdate = CASCADE)})
 public class Resposta {
 
     private int id;
@@ -25,7 +25,7 @@ public class Resposta {
 
         this.id         = tblResposta.getId();
         this.resposta   = tblResposta.getResposta();
-        this.perguntaid = tblResposta.getperguntaid();
+        this.perguntaid = tblResposta.getPerguntaid();
 
     }
 
@@ -37,11 +37,11 @@ public class Resposta {
         this.id = id;
     }
 
-    public int getperguntaid() {
+    public int getPerguntaid() {
         return perguntaid;
     }
 
-    public void setperguntaid(int perguntaid) {
+    public void setPerguntaid(int perguntaid) {
         this.perguntaid = perguntaid;
     }
 

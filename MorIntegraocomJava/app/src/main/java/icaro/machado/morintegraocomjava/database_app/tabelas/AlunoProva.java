@@ -12,7 +12,7 @@ import androidx.room.Index;
        ,    foreignKeys = {@ForeignKey(entity = Aluno.class, parentColumns = "id",
                 childColumns = "alunoid", onDelete = CASCADE, onUpdate = CASCADE)
                     ,  @ForeignKey(entity = Prova.class, parentColumns = "id",
-                childColumns = "prova id", onDelete = CASCADE, onUpdate = CASCADE)})
+                childColumns = "provaid", onDelete = CASCADE, onUpdate = CASCADE)})
 
 public class AlunoProva {
 
@@ -24,24 +24,24 @@ public class AlunoProva {
 
     public AlunoProva(AlunoProva tblAlunoProva) {
 
-        this.alunoid = tblAlunoProva.getAlunoID();
-        this.provaid = tblAlunoProva.getProvaID();
+        this.alunoid = tblAlunoProva.getAlunoid();
+        this.provaid = tblAlunoProva.getProvaid();
 
     }
 
-    public int getAlunoID() {
+    public int getAlunoid() {
         return alunoid;
     }
 
-    public void setAlunoID(int alunoid) {
+    public void setAlunoid(int alunoid) {
         this.alunoid = alunoid;
     }
 
-    public int getProvaID() {
+    public int getProvaid() {
         return provaid;
     }
 
-    public void setProvaID(int provaid) {
+    public void setProvaid(int provaid) {
         this.provaid = provaid;
     }
 }
